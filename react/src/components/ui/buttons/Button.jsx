@@ -12,7 +12,7 @@ function Button(props) {
 }
 
 Button.defaultProps = {
-	text: 'Default Text',
+	text: 'Default Button Text'
 };
 
 export default Button;

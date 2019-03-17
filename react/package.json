@@ -46,6 +46,7 @@
 		"react-dom": "^16.8.3",
 		"resolve": "1.10.0",
 		"sass-loader": "7.1.0",
+		"sass-resources-loader": "^2.0.0",
 		"style-loader": "0.23.1",
 		"terser-webpack-plugin": "1.2.2",
 		"url-loader": "1.1.2",
@@ -71,6 +72,6 @@
 		"styleguide:build": "styleguidist build",
 		"eslint": "eslint src/**/*.{js,jsx}",
 		"eslint:fix": "eslint src/**/*.{js,jsx} --fix",
-		"svg": "node node_modules/@svgr/cli/bin/svgr assets/svg* --out-dir src/components/ui/svg --ext jsx --template config/svgr/index.js"
+		"svg": "node node_modules/@svgr/cli/bin/svgr assets/svg* --out-dir src/components/ui/svg --ext jsx --svgo-config config/svgr/svgo.json --template config/svgr/index.js"
 	}
 }

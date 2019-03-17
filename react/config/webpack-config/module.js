@@ -9,18 +9,14 @@ module.exports = function(
 	getStyleLoaders,
 	getCSSModuleLocalIdent
 ) {
-	console.log('sassRegex', sassRegex);
-	console.log('sassModuleRegex', sassModuleRegex);
-	console.log('cssRegex', cssRegex);
-	console.log('cssModuleRegex', cssModuleRegex);
 	return {
 		strictExportPresence: true,
 		rules: [
 			// Disable require.ensure as it's not a standard language feature.
 			{
 				parser: {
-					requireEnsure: false,
-				},
+					requireEnsure: false
+				}
 			},
 
 			// First, run the linter.
@@ -32,12 +28,12 @@ module.exports = function(
 					{
 						options: {
 							formatter: require.resolve('react-dev-utils/eslintFormatter'),
-							eslintPath: require.resolve('eslint'),
+							eslintPath: require.resolve('eslint')
 						},
-						loader: require.resolve('eslint-loader'),
-					},
+						loader: require.resolve('eslint-loader')
+					}
 				],
-				include: paths.appSrc,
+				include: paths.appSrc
 			},
 			{
 				// "oneOf" will traverse all following loaders until one will
@@ -52,8 +48,8 @@ module.exports = function(
 						loader: require.resolve('url-loader'),
 						options: {
 							limit: 10000,
-							name: 'static/media/[name].[hash:8].[ext]',
-						},
+							name: 'static/media/[name].[hash:8].[ext]'
+						}
 					},
 					// Process application JS with Babel.
 					// The preset includes JSX, Flow, TypeScript, and some ESnext features.
@@ -81,8 +77,8 @@ module.exports = function(
 							// directory for faster rebuilds.
 							cacheDirectory: true,
 							cacheCompression: isEnvProduction,
-							compact: isEnvProduction,
-						},
+							compact: isEnvProduction
+						}
 					},
 					// Process any JS outside of the app with Babel.
 					// Unlike the application JS, we only compile the standard ES features.
@@ -98,9 +94,9 @@ module.exports = function(
 								[
 									require.resolve('babel-preset-react-app/dependencies'),
 									{
-										helpers: true,
-									},
-								],
+										helpers: true
+									}
+								]
 							],
 							cacheDirectory: true,
 							cacheCompression: isEnvProduction,
@@ -109,8 +105,8 @@ module.exports = function(
 							// because it was compiled. Thus, we don't want the browser
 							// debugger to show the original code. Instead, the code
 							// being evaluated would be much more helpful.
-							sourceMaps: false,
-						},
+							sourceMaps: false
+						}
 					},
 					// "postcss" loader applies autoprefixer to our CSS.
 					// "css" loader resolves paths in CSS and adds assets as dependencies.
@@ -124,13 +120,13 @@ module.exports = function(
 						exclude: cssModuleRegex,
 						use: getStyleLoaders({
 							importLoaders: 1,
-							sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
+							sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment
 						}),
 						// Don't consider CSS imports dead code even if the
 						// containing package claims to have no side effects.
 						// Remove this when webpack adds a warning or an error for this.
 						// See https://github.com/webpack/webpack/issues/6571
-						sideEffects: true,
+						sideEffects: true
 					},
 					// Adds support for CSS Modules (https://github.com/css-modules/css-modules)
 					// using the extension .module.css
@@ -140,8 +136,8 @@ module.exports = function(
 							importLoaders: 1,
 							sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
 							modules: true,
-							getLocalIdent: getCSSModuleLocalIdent,
-						}),
+							getLocalIdent: getCSSModuleLocalIdent
+						})
 					},
 					// Opt-in support for SASS (using .scss or .sass extensions).
 					// By default we support SASS Modules with the
@@ -152,7 +148,7 @@ module.exports = function(
 						use: getStyleLoaders(
 							{
 								importLoaders: 2,
-								sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
+								sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment
 							},
 							'sass-loader'
 						),
@@ -160,7 +156,7 @@ module.exports = function(
 						// containing package claims to have no side effects.
 						// Remove this when webpack adds a warning or an error for this.
 						// See https://github.com/webpack/webpack/issues/6571
-						sideEffects: true,
+						sideEffects: true
 					},
 					// Adds support for CSS Modules, but using SASS
 					// using the extension .module.scss or .module.sass
@@ -171,10 +167,10 @@ module.exports = function(
 								importLoaders: 2,
 								sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
 								modules: true,
-								getLocalIdent: getCSSModuleLocalIdent,
+								getLocalIdent: getCSSModuleLocalIdent
 							},
 							'sass-loader'
-						),
+						)
 					},
 					// "file" loader makes sure those assets get served by WebpackDevServer.
 					// When you `import` an asset, you get its (virtual) filename.
@@ -189,13 +185,13 @@ module.exports = function(
 						// by webpacks internal loaders.
 						exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
 						options: {
-							name: 'static/media/[name].[hash:8].[ext]',
-						},
-					},
+							name: 'static/media/[name].[hash:8].[ext]'
+						}
+					}
 					// ** STOP ** Are you adding a new loader?
 					// Make sure to add the new loader(s) before the "file" loader.
-				],
-			},
-		],
+				]
+			}
+		]
 	};
 };

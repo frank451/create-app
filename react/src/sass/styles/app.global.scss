@@ -1,0 +1,39 @@
+.app {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100vh;
+	background: lightgoldenrodyellow;
+}
+
+.app__header {
+	align-self: flex-end;
+}
+
+.app__main {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.app__main-inner {
+	align-self: center;
+}
+
+.app__logo {
+	animation: app__logo-spin infinite 20s linear;
+	transform-origin: center center;
+	path:last-child {
+		fill: pink;
+	}
+}
+
+@keyframes app__logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}

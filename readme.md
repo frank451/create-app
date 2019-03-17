@@ -54,6 +54,7 @@ webpack
 ## svg
 
 -   https://github.com/smooth-code/svgr
+    https://material.io/tools/icons/?style=baseline
 
 ## styleguide
 

@@ -77,14 +77,14 @@ module.exports = function(webpackEnv) {
 					{},
 					shouldUseRelativeAssetPaths
 						? {
-								publicPath: '../../',
+								publicPath: '../../'
 						  }
 						: undefined
-				),
+				)
 			},
 			{
 				loader: require.resolve('css-loader'),
-				options: cssOptions,
+				options: cssOptions
 			},
 			{
 				// Options for PostCSS as we reference these options twice
@@ -99,21 +99,28 @@ module.exports = function(webpackEnv) {
 						require('postcss-flexbugs-fixes'),
 						require('postcss-preset-env')({
 							autoprefixer: {
-								flexbox: 'no-2009',
+								flexbox: 'no-2009'
 							},
-							stage: 3,
-						}),
+							stage: 3
+						})
 					],
-					sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
-				},
-			},
+					sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment
+				}
+			}
 		].filter(Boolean);
 		if (preProcessor) {
 			loaders.push({
 				loader: require.resolve(preProcessor),
 				options: {
+					sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment
+				}
+			});
+			loaders.push({
+				loader: require.resolve('sass-resources-loader'),
+				options: {
 					sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
-				},
+					resources: path.resolve(paths.appSrc, 'sass/non-styles/**/*.scss')
+				}
 			});
 		}
 		return loaders;
@@ -139,7 +146,7 @@ module.exports = function(webpackEnv) {
 			// require.resolve('webpack/hot/dev-server'),
 			isEnvDevelopment && require.resolve('react-dev-utils/webpackHotDevClient'),
 			// Finally, this is your app's code:
-			paths.appIndexJs,
+			paths.appIndexJs
 			// We include the app code last so that if there is a runtime error during
 			// initialization, it doesn't blow up the WebpackDevServer client, and
 			// changing JS code would still trigger a refresh.
@@ -162,7 +169,7 @@ module.exports = function(webpackEnv) {
 			// Point sourcemap entries to original disk location (format as URL on Windows)
 			devtoolModuleFilenameTemplate: isEnvProduction
 				? info => path.relative(paths.appSrc, info.absoluteResourcePath).replace(/\\/g, '/')
-				: isEnvDevelopment && (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
+				: isEnvDevelopment && (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'))
 		},
 
 		optimization: optimization(
@@ -194,7 +201,7 @@ module.exports = function(webpackEnv) {
 				// Support React Native Web
 				// https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
 				'react-native': 'react-native-web',
-				ui: path.resolve(paths.appSrc, 'components/ui/'),
+				ui: path.resolve(paths.appSrc, 'components/ui/')
 			},
 			plugins: [
 				// Adds support for installing with Plug'n'Play, leading to faster installs and adding
@@ -205,15 +212,15 @@ module.exports = function(webpackEnv) {
 				// To fix this, we prevent you from importing files out of src/ -- if you'd like to,
 				// please link the files into your node_modules/ and let module-resolution kick in.
 				// Make sure your source files are compiled, as they will not be processed in any way.
-				new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
-			],
+				new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson])
+			]
 		},
 		resolveLoader: {
 			plugins: [
 				// Also related to Plug'n'Play, but this time it tells Webpack to load its loaders
 				// from the current package.
-				PnpWebpackPlugin.moduleLoader(module),
-			],
+				PnpWebpackPlugin.moduleLoader(module)
+			]
 		},
 
 		module: _module(
@@ -253,10 +260,10 @@ module.exports = function(webpackEnv) {
 			fs: 'empty',
 			net: 'empty',
 			tls: 'empty',
-			child_process: 'empty',
+			child_process: 'empty'
 		},
 		// Turn off performance processing because we utilize
 		// our own hints via the FileSizeReporter
-		performance: false,
+		performance: false
 	};
 };
